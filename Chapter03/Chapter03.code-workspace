@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "BooleanOperators"
+		},
+		{
+			"path": "BitwiseAndShiftOperators"
 		}
 	],
 	"settings": {}
