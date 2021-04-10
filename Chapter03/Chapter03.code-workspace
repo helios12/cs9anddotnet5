@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "BitwiseAndShiftOperators"
+		},
+		{
+			"path": "SelectionStatements"
 		}
 	],
 	"settings": {}
