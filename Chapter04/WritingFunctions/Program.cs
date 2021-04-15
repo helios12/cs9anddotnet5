@@ -74,6 +74,30 @@ namespace WritingFunctions
             return amount * rate;
         }
 
+        static decimal CalculateTaxViaSwitchExpression(decimal amount, string twoLetterRegionCode)
+        {
+            decimal rate = twoLetterRegionCode.ToUpper() switch
+            {
+                "CH" => rate = 0.08M,
+                "DK" => rate = 0.25M,
+                "NO" => rate = 0.25M,
+                "GB" => rate = 0.2M,
+                "FR" => rate = 0.2M,
+                "HU" => rate = 0.27M,
+                "OR" => rate = 0.0M,
+                "AK" => rate = 0.0M,
+                "MT" => rate = 0.0M,
+                "ND" => rate = 0.05M,
+                "WI" => rate = 0.05M,
+                "ME" => rate = 0.05M,
+                "VA" => rate = 0.05M,
+                "CA" => rate = 0.0825M,
+                _ => rate = 0.06M
+            };
+
+            return amount * rate;
+        }
+
         static void RunCalculateTask()
         {
             Write("Enter an amount: ");
@@ -82,7 +106,7 @@ namespace WritingFunctions
             string region = ReadLine();
             if (decimal.TryParse(amountInText, out decimal amount))
             {
-                decimal taxToPay = CalculateTax(amount, region);
+                decimal taxToPay = CalculateTaxViaSwitchExpression(amount, region);
                 WriteLine($"You must pay {taxToPay} in sales tax.");
             }
             else
@@ -91,10 +115,128 @@ namespace WritingFunctions
             }
         }
 
+        /// <summary>
+        /// Pass a 32-bit integer and it will be converted to its ordinal equivalent.
+        /// </summary>
+        /// <param name="number">Number as a cardinal value, e.g. 1, 2, 3 and so on.</param>
+        /// <returns>Number as an ordinal value, e.g. 1st, 2nd, 3rd and so on.</returns>
+        static string CardinalToOrdinal(int number)
+        {
+            switch (number)
+            {
+                case 11:
+                case 12:
+                case 13:
+                    return $"{number}th";
+                default:
+                    int lastDigit = number % 10;
+                    string suffix = lastDigit switch
+                    {
+                        1 => "st",
+                        2 => "nd",
+                        3 => "rd",
+                        _ => "th"
+                    };
+                    return $"{number}{suffix}";
+            }
+        }
+
+        static void RunCardinalToOrdinal()
+        {
+            for (int number = 1; number <= 40; number++)
+            {
+                Write($"{CardinalToOrdinal(number)} ");
+            }
+        }
+
+        static int Factorial(int number)
+        {
+            if (number < 1)
+            {
+                return 0;
+            }
+            else if (number == 1)
+            {
+                return 1;
+            }
+            else
+            {
+                checked
+                {
+                    return number * Factorial(number - 1);
+                }
+            }
+        }
+
+        static void RunFactorial()
+        {
+            for (int i = 1; i < 15; i ++)
+            {
+                try
+                {
+                    WriteLine($"{i}! = {Factorial(i):N0}");
+                }
+                catch (OverflowException)
+                {
+                    WriteLine($"{i}! is too big for a 32-bit integer.");
+                }
+            }
+        }
+
+        static int FibImperative(int term)
+        {
+            if (term == 1)
+            {
+                return 0;
+            }
+            else if (term == 2)
+            {
+                return 1;
+            }
+            else
+            {
+                return FibImperative(term - 1) + FibImperative(term - 2);
+            }
+        }
+
+        static void RunFibImperative()
+        {
+            for (int i = 1; i <= 30; i++)
+            {
+                WriteLine("The {0} term of the Fibonacci sequence is {1:N0}.",
+                    arg0: CardinalToOrdinal(i),
+                    arg1: FibImperative(i)
+                );
+            }
+        }
+
+        static int FibFunctional(int term) =>
+            term switch
+            {
+                1 => 0,
+                2 => 1,
+                _ => FibFunctional(term - 1) + FibFunctional(term - 2)
+            };
+
+        static void RunFibFunctional()
+        {
+            for (int i = 1; i <= 30; i++)
+            {
+                WriteLine("The {0} term of the Fibonacci sequence is {1:N0}.",
+                    arg0: CardinalToOrdinal(i),
+                    arg1: FibFunctional(i)
+                );
+            }
+        }
+
         static void Main(string[] args)
         {
             // RunTimesTable();
-            RunCalculateTask();
+            // RunCalculateTask();
+            // RunCardinalToOrdinal();
+            // RunFactorial();
+            // RunFibImperative();
+            RunFibFunctional();
         }
     }
 }
