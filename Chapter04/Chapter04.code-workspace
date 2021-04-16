@@ -8,6 +8,21 @@
 		},
 		{
 			"path": "Instrumenting"
+		},
+		{
+			"path": "CalculatorLib"
+		},
+		{
+			"path": "CalculatorLibUnitTests"
+		},
+		{
+			"path": "PrimeFactorsLib"
+		},
+		{
+			"path": "PrimeFactorsConsole"
+		},
+		{
+			"path": "PrimeFactorsUnitTests"
 		}
 	],
 	"settings": {}
