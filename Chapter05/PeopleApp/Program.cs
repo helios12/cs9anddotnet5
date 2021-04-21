@@ -117,7 +117,57 @@ namespace PeopleApp
             WriteLine($"{sam.Name}'s second child is {sam.Children[1].Name}.");
             WriteLine($"{sam.Name}'s first child is {sam[0].Name}.");
             WriteLine($"{sam.Name}'s second child is {sam[1].Name}.");
-            
+
+            object [] passengers = {
+                new FirstClassPassenger { AirMiles = 1_419 }, 
+                new FirstClassPassenger { AirMiles = 16_562 }, 
+                new BusinessClassPassenger(), 
+                new CoachClassPassenger { CarryOnKG = 25.7 },
+                new CoachClassPassenger { CarryOnKG = 0 }
+            };
+            foreach (var passenger in passengers)
+            {
+                decimal flightCost = passenger switch
+                {
+                    FirstClassPassenger p => p.AirMiles switch 
+                    {
+                        > 35000 => 1500M,
+                        > 15000 => 1750M,
+                        _ => 2000M
+                    },
+                    BusinessClassPassenger => 1000M,
+                    CoachClassPassenger p when p.CarryOnKG < 10.0 => 500M,
+                    CoachClassPassenger => 650M,
+                    _ => 800M
+                };
+                WriteLine($"Flight costs {flightCost:C} for {passenger}");
+            }
+
+            ImmutablePerson jeff = new ImmutablePerson
+            {
+                FirstName = "Jeff",
+                LastName = "Winger"
+            };
+            // jeff.FirstName = "Geoff";
+
+            ImmutableVehicle car = new ImmutableVehicle
+            {
+                Brand = "Mazda MX-5 RF",
+                Color = "Soul Red Crystal Metallic",
+                Wheels = 4
+            };
+            ImmutableVehicle repaintedCar = car with 
+            {
+                Color = "Polymetal Grey Metallic"
+            };
+            WriteLine("Original color was {0}, new color is {1}.",
+                arg0: car.Color,
+                arg1: repaintedCar.Color
+            );
+
+            ImmutablAnimal oscar = new ImmutablAnimal("Oscar", "Labrador");
+            var (who, what) = oscar;
+            WriteLine($"{who} is a {what}.");
         }
     }
 }
