@@ -5,7 +5,7 @@ using static System.Console;
 
 namespace Packt.Shared
 {
-    public class Person 
+    public partial class Person 
     {
         public const string Species = "Homo Sapiens";
         public readonly string HomePlanet = "Earth";
