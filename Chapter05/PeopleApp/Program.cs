@@ -168,6 +168,7 @@ namespace PeopleApp
             ImmutablAnimal oscar = new ImmutablAnimal("Oscar", "Labrador");
             var (who, what) = oscar;
             WriteLine($"{who} is a {what}.");
+            
         }
     }
 }
