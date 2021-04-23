@@ -10,6 +10,8 @@ namespace PeopleApp
     {
         static void Main(string[] args)
         {
+            WriteLine($"5! is {Person.Factorial(5)}.");
+
             Person harry = new Person { Name = "Harry" };
             Person mary = new Person { Name = "Mary" };
             Person jill = new Person { Name = "Jill" };
@@ -25,6 +27,37 @@ namespace PeopleApp
                 arg0: harry.Name,
                 arg1: harry.Children[0].Name
             );
+
+            harry.Shout += Harry_Shout;
+            harry.Poke();
+            harry.Poke();
+            harry.Poke();
+            harry.Poke();
+
+            Person [] people = 
+            {
+                new Person { Name = "Simon" },
+                new Person { Name = "Jenny" },
+                new Person { Name = "Adam" },
+                new Person { Name = "Richard" }
+            };
+            WriteLine("Initial list of people:");
+            foreach (Person person in people)
+            {
+                WriteLine($"\t{person.Name}");
+            }
+            WriteLine("Use Person's IComparable implementation to sort:");
+            Array.Sort(people);
+            foreach (Person person in people)
+            {
+                WriteLine($"\t{person.Name}");
+            }
+        }
+
+        private static void Harry_Shout(object sender, EventArgs e)
+        {
+            Person p = (Person)sender;
+            WriteLine($"{p.Name} is this angry: {p.AngerLevel}.");
         }
     }
 }
