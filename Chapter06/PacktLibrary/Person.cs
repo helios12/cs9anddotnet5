@@ -13,7 +13,7 @@ namespace Packt.Shared
         
         public void WriteToConsole()
         {
-            WriteLine($"{Name} was born on a {DateOfBirth: dddd}.");
+            WriteLine($"{Name} was born on a {DateOfBirth:dddd}.");
         }
 
         public static Person Procreate(Person p1, Person p2)
