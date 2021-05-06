@@ -5,6 +5,12 @@
 		},
 		{
 			"path": "WorkingWithText"
+		},
+		{
+			"path": "WorkingWithRegularExpressions"
+		},
+		{
+			"path": "WorkingWithLists"
 		}
 	]
 }
