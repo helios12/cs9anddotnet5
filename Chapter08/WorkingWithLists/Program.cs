@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 
 using static System.Console;
 
@@ -30,6 +31,19 @@ namespace WorkingWithLists
             cities.Remove("Milan");
             WriteLine("After removing two cities:");
             foreach (string city in cities)
+            {
+                WriteLine($" {city}");
+            }
+
+            ImmutableList<string> immutableCities = cities.ToImmutableList();
+            ImmutableList<string> newList = immutableCities.Add("Rio");
+            WriteLine("Immutable list of cities:");
+            foreach (string city in immutableCities)
+            {
+                WriteLine($" {city}");
+            }
+            WriteLine("New list of cities:");
+            foreach (string city in newList)
             {
                 WriteLine($" {city}");
             }
