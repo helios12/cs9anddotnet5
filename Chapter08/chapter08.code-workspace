@@ -20,6 +20,21 @@
 		},
 		{
 			"path": "WorkingWithReflection"
+		},
+		{
+			"path": "WorkingWithImages"
+		},
+		{
+			"path": "Internationalization"
+		},
+		{
+			"path": "Excercise02"
+		},
+		{
+			"path": "Excercise03dll"
+		},
+		{
+			"path": "Excercise03test"
 		}
 	]
 }
