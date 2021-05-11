@@ -35,6 +35,9 @@
 		},
 		{
 			"path": "Excercise03test"
+		},
+		{
+			"path": "Excercise03UnitTest"
 		}
 	]
 }
