@@ -94,6 +94,13 @@ namespace WorkingWithFileSystems
             WriteLine($"File extension: {GetExtension(textFile)}");
             WriteLine($"Randonm file name: {GetRandomFileName()}");
             WriteLine($"Temporary file name: {GetTempFileName()}");
+
+            FileInfo info = new FileInfo(backupFile);
+            WriteLine($"{backupFile}:");
+            WriteLine($"Contains {info.Length} bytes.");
+            WriteLine($"Last accessed: {info.LastAccessTime}.");
+            WriteLine($"Has RadOnly set to: {info.IsReadOnly}.");
+            WriteLine("Is the backup file compressed?: {0}", info.Attributes.HasFlag(FileAttributes.Compressed));
         }
     }
 }
