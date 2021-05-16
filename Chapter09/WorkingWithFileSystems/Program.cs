@@ -14,7 +14,8 @@ namespace WorkingWithFileSystems
         {
             // OutputFileSystemInfo();
             // WorkWithDrives();
-            WorkWithDirectories();            
+            // WorkWithDirectories();            
+            WorkWithFiles();
         }
 
         static void OutputFileSystemInfo()
@@ -64,6 +65,35 @@ namespace WorkingWithFileSystems
             WriteLine("Delete it...");
             Delete(newFolder, recursive: true);
             WriteLine($"Does it exist? {Exists(newFolder)}");
+        }
+
+        static void WorkWithFiles()
+        {
+            string dir = Combine(GetFolderPath(SpecialFolder.Personal), "Code", "Chapter09", "OutputFiles");
+            CreateDirectory(dir);
+            string textFile = Combine(dir, "dummy.txt");
+            string backupFile = Combine(dir, "dummy.bak");
+            WriteLine($"Working with {textFile}");
+            WriteLine($"Does it exist? {File.Exists(textFile)}");
+            StreamWriter textWriter = File.CreateText(textFile);
+            textWriter.WriteLine("Hello, c#!");
+            textWriter.Close();
+            WriteLine($"Does it exist? {File.Exists(textFile)}");
+            File.Copy(sourceFileName: textFile, destFileName: backupFile, overwrite: true);
+            WriteLine($"Does {backupFile} exist? {File.Exists(backupFile)}");
+            File.Delete(textFile);
+            WriteLine($"Does it exist? {File.Exists(textFile)}");
+            WriteLine($"Reading contents of {backupFile}");
+            StreamReader textReader = File.OpenText(backupFile);
+            WriteLine(textReader.ReadToEnd());
+            textReader.Close();
+
+            WriteLine($"Folder name: {GetDirectoryName(textFile)}");
+            WriteLine($"File name: {GetFileName(textFile)}");
+            WriteLine($"File name without extension {GetFileNameWithoutExtension(textFile)}");
+            WriteLine($"File extension: {GetExtension(textFile)}");
+            WriteLine($"Randonm file name: {GetRandomFileName()}");
+            WriteLine($"Temporary file name: {GetTempFileName()}");
         }
     }
 }
