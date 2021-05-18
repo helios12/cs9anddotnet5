@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "CryptographyLib"
+		},
+		{
+			"path": "EncryptionApp"
+		},
+		{
+			"path": "HashingApp"
+		}
+	]
+}
