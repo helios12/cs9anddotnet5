@@ -118,6 +118,14 @@ namespace Packt.Shared
             return rsa.VerifyHash(hashedData, signatureBytes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
         }
 
+        public static byte[] GetRandomKeyOrIV(int size)
+        {
+            RandomNumberGenerator r = RandomNumberGenerator.Create();
+            byte[] data = new byte[size];
+            r.GetNonZeroBytes(data);
+            return data;
+        }
+
         private static Aes GetAes(string password)
         {
             Aes aes = Aes.Create();
