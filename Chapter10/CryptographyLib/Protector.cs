@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Security.Principal;
@@ -126,6 +125,16 @@ namespace Packt.Shared
             return data;
         }
 
+        public static void LogIn(string userName, string password)
+        {
+            if (CheckPassword(userName, password))
+            {
+                var identity = new GenericIdentity(userName, "PacktAuth");
+                var principal = new GenericPrincipal(identity, User.CurrentUsers[userName].Roles);
+                System.Threading.Thread.CurrentPrincipal = principal;
+            }
+        }
+
         private static Aes GetAes(string password)
         {
             Aes aes = Aes.Create();
@@ -135,5 +144,15 @@ namespace Packt.Shared
             return aes;
         }
 
+        private static bool CheckPassword(string userName, string password)
+        {
+            if (!User.CurrentUsers.ContainsKey(userName))
+            {
+                return false;
+            }
+            User user = User.CurrentUsers[userName];
+            string saltedHashedPassword = Protector.SaltAndHash(password, user.Salt);
+            return (saltedHashedPassword == user.SaltedHashedPassword);
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace Packt.Shared
 
         public static Dictionary<string, User> CurrentUsers = new Dictionary<string, User>();
 
-        public static User Register(string userName, string password)
+        public static User Register(string userName, string password, string[] roles = null)
         {
             RandomNumberGenerator rng = RandomNumberGenerator.Create();
             var saltBytes = new byte[16];
@@ -24,7 +24,8 @@ namespace Packt.Shared
             {
                 Name = userName,
                 Salt = saltText,
-                SaltedHashedPassword = saltedHashedPassword
+                SaltedHashedPassword = saltedHashedPassword,
+                Roles = roles
             };
             CurrentUsers.Add(user.Name, user);
             return user;
