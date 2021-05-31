@@ -5,7 +5,7 @@ namespace Packt.Shared
 {
     public class Product
     {
-        public int ProductID {get; set;}
+        public int ProductID {get; set;} 
         [Required]
         [StringLength(40)]
         public string ProductName {get; set;}
